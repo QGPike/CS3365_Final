@@ -391,7 +391,7 @@ public class Main extends Application{
         itemInfo itemdescription = project.getDescription(newArray);
         System.out.println(itemdescription.itemName[counter.count]);
         System.out.println(itemdescription.itemAmount[counter.count]);
-        display = display +itemdescription.itemName[counter.count] +" "+ itemdescription.itemAmount[counter.count]+"\n";
+        display = display +"Item: "+itemdescription.itemName[counter.count] +" "+"Amount: "+ itemdescription.itemAmount[counter.count]+"\n";
 
         if(isFirst)
         {
@@ -431,12 +431,12 @@ public class Main extends Application{
             if(newArray[i][m].equals(ItemID)){
                 if(ItemID.equals(bread)){
                     m++;
-                    display = display + "Bread" + " "+ newArray[i][m]+"\n";
+                    display = display +"Item: "+ "Bread" + " "+"Amount: "+ newArray[i][m]+"\n";
                     i++;
                 }
                 else if(ItemID.equals(soda)){
                     m++;
-                    display = display + "Soda" + " "+ newArray[i][m]+"\n";
+                    display = display +"Item: "+ "Soda" + " "+"Amount: "+ newArray[i][m]+"\n";
                     i++;
                 }
             }
