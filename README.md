@@ -61,4 +61,5 @@ transaction has been completed.
 
 The inventory system dynamically keeps track of the current numbers of items. When the
 number of an item goes below a certain threshold, an inventory message is created and stored in
-the system
+the system. Inventory orders with quantities of products are automatically sent at night to the
+suppliers and are recorded in the system. 
