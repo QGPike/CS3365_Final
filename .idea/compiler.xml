@@ -6,11 +6,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="CS3365_Final" />
+        <module name="CS3365Final" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="CS3365_Final" target="17" />
+      <module name="CS3365Final" target="17" />
     </bytecodeTargetLevel>
   </component>
 </project>

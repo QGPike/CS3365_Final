@@ -1,4 +1,4 @@
-module sample.cs3365_final {
+module sample.cs3365final {
     requires javafx.controls;
     requires javafx.fxml;
     requires javafx.web;
@@ -10,6 +10,6 @@ module sample.cs3365_final {
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
 
-    opens sample.cs3365_final to javafx.fxml;
-    exports sample.cs3365_final;
+    opens sample.cs3365final to javafx.fxml;
+    exports sample.cs3365final;
 }

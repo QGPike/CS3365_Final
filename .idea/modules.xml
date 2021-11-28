@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/CS3365_Final.iml" filepath="$PROJECT_DIR$/CS3365_Final.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CS3365Final.iml" filepath="$PROJECT_DIR$/CS3365Final.iml" />
     </modules>
   </component>
 </project>

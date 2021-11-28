@@ -5,9 +5,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>sample</groupId>
-    <artifactId>CS3365_Final</artifactId>
+    <artifactId>CS3365Final</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <name>CS3365_Final</name>
+    <name>CS3365Final</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -112,7 +112,7 @@
                         <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>sample.cs3365_final/sample.cs3365_final.HelloApplication</mainClass>
+                            <mainClass>sample.cs3365final/sample.cs3365final.HelloApplication</mainClass>
                         </configuration>
                     </execution>
                 </executions>
