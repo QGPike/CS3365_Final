@@ -3,6 +3,7 @@ Supermarket Checkout/Inventory System (SCIS) Implementation and Documentation
 
 
 Problem Description:
+
 There are supermarkets across the US where a checkout system processes customer checkout,
 and an inventory system controls the level of product stock in the supermarkets. A cashier can
 use a supermarket checkout system to check out a customer’s items. A supermarket inventory
