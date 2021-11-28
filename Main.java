@@ -56,7 +56,16 @@ public class Main extends Application{
             ITEM_ID.setStyle("-fx-background-color: MediumSeaGreen");
             ITEM_ID.setMinSize(60, 45);
             GridPane.setConstraints(ITEM_ID, 3, 3);
-            //Scan.setOnAction(e -> btn_ITEM_ID());
+
+
+            ITEM_ID.setOnAction(e -> {
+                try {
+                    btn_ITEM_ID();
+                } catch (FileNotFoundException fileNotFoundException) {
+                    fileNotFoundException.printStackTrace();
+                }
+            });
+
 
             Button Scale = new Button("Scale");
             Scale.setStyle("-fx-background-color: MediumSeaGreen");
@@ -101,7 +110,16 @@ public class Main extends Application{
             ITEM_ID.setStyle("-fx-background-color: MediumSeaGreen");
             ITEM_ID.setMinSize(60, 45);
             GridPane.setConstraints(ITEM_ID, 3, 3);
-            ITEM_ID.setOnAction(e -> btn_ITEM_ID());
+
+            ITEM_ID.setOnAction(e -> {
+                try {
+                    btn_ITEM_ID();
+                } catch (FileNotFoundException fileNotFoundException) {
+                    fileNotFoundException.printStackTrace();
+                }
+            });
+
+
 
             Button Scale = new Button("Scale");
             Scale.setStyle("-fx-background-color: MediumSeaGreen");
@@ -144,6 +162,7 @@ public class Main extends Application{
 
         }
 
+        //--------------------------------------------------------------------------------------ITEM-ID
         else if(newStage == 2){
             stage.setTitle("Enter Item ID With the Numpad");
             GridPane grid = new GridPane();
@@ -155,15 +174,27 @@ public class Main extends Application{
             Button Scale = new Button("Scale");
             Scale.setStyle("-fx-background-color: MediumSeaGreen");
             Scale.setMinSize(60, 45);
-            GridPane.setConstraints(Scale, 4, 3);
+            GridPane.setConstraints(Scale, 2, 3);
             //Scan.setOnAction(e -> btn_Scale());
+            Button Enter = new Button("Enter:");
+            Enter.setStyle("-fx-background-color: MediumSeaGreen");
+            Enter.setMinSize(60, 45);
+            GridPane.setConstraints(Enter, 4, 3);
+            Enter.setOnAction(e -> {
+                try {
+                    btn_numpadEnter();
+                } catch (FileNotFoundException fileNotFoundException) {
+                    fileNotFoundException.printStackTrace();
+                }
+            });
 
-//--------------------------------------------------------------------displays
-            Label lblCashierDisplay = new Label("---Cashier Display---");
-            GridPane.setConstraints(lblCashierDisplay, 7, 3);
-            Label lblCustomerDisplay = new Label("---Customer Display---");
-            GridPane.setConstraints(lblCustomerDisplay, 25, 3);
+
 //---------------------------------------------------------------------numpad -->
+            Label lblNumpad = new Label("NUMPAD:");
+            GridPane.setConstraints(lblNumpad, 3, 9);
+            Label lblNumber = new Label(ItemID);
+            GridPane.setConstraints(lblNumber, 4,9 );
+
 
             Button num1 = new Button("1");
             num1.setStyle("-fx-background-color: MediumSeaGreen");
@@ -225,7 +256,7 @@ public class Main extends Application{
             GridPane.setConstraints(num0, 3, 8);
             num0.setOnAction(e -> btn_Numpad(0));
 
-            grid.getChildren().addAll(Scale,lblCashierDisplay,lblCustomerDisplay, num1, num2, num3, num4, num5, num6, num7, num8, num9, num0);
+            grid.getChildren().addAll(Scale,lblNumpad,lblNumber,Enter, num1, num2, num3, num4, num5, num6, num7, num8, num9, num0);
             Scene scene = new Scene(grid, 1000, 1000);
             stage.setScene(scene);
             stage.show();
@@ -245,20 +276,50 @@ public class Main extends Application{
         changeStage(primaryStage, 1);
 
     }
+
     private void btn_Numpad(int number){//passes whatever number is pressed
         ItemID = ItemID + Integer.toString(number);
+        try {
+            changeStage(primaryStage,2);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
-
-
-    private void btn_ITEM_ID(){
+    private void btn_ITEM_ID() throws FileNotFoundException {
         changeStage(primaryStage, 2);
     }
+    private void btn_numpadEnter() throws FileNotFoundException {
+        Project project = new Project();
+        String[][] newArray = project.parser();
+        itemInfo itemdescription = project.getDescription(newArray);
+        int i = 0;
+        int m = 0;
+        String bread = "123456";//create variables to store item-ID.
+        String soda = "234567";
+        int linecount = project.linecounter();
+        while(i < linecount){
+            if(newArray[i][m] == ItemID){
+                if(ItemID == bread){
+                    m++;
+                    display = display + "Bread" + " "+ newArray[i][m]+"\n";
+                    i++;
+                }
+                else if(ItemID == soda){
+                    m++;
+                    display = display + "Soda" + " "+ newArray[i][m]+"\n";
+                    i++;
+                }
+            }
+            else{i++;}
 
+        }
 
-    public void main(String[] args) {
-        launch(args);
+        changeStage(primaryStage,1);
     }
+
+
+
 
 }
 
