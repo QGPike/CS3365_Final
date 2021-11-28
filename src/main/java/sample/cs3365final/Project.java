@@ -13,11 +13,11 @@ class itemInfo{//class to store name, how many of each item, and the prices of e
 
 }
 
-class custInfo
+class custInfo //Holds sample account data to be used in demo
 {
-    String pNum;
-    String memPin;
-    int cP;
+    String pNum; //Phone
+    String memPin; //Pin
+    int cP; //Loyalty points
 
     public custInfo(String pNum, String memPin, int cP)
     {
