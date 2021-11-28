@@ -268,7 +268,7 @@ public class Main extends Application{
 
     }
 
-    public void loyalCustomer(int newStage) throws FileNotFoundException
+    public void loyalCustomer(Stage stage, int newStage) throws FileNotFoundException
     {
         try
         {
@@ -300,7 +300,7 @@ public class Main extends Application{
                 }
             });
 
-
+            
 //---------------------------------------------------------------------numpad -->
             Label lblNumpad = new Label("NUMPAD:");
             GridPane.setConstraints(lblNumpad, 3, 9);
@@ -331,6 +331,7 @@ public class Main extends Application{
             num4.setMinSize(60, 45);
             GridPane.setConstraints(num4, 2, 6);
             num4.setOnAction(e -> btn_Numpad(4));
+
 
             Button num5 = new Button("5");
             num5.setStyle("-fx-background-color: MediumSeaGreen");
@@ -395,7 +396,7 @@ public class Main extends Application{
 
         if(isFirst)
         {
-            loyalCustomer(1);
+            loyalCustomer(primaryStage, 1);
         }
 
         changeStage(primaryStage, 1);
@@ -407,7 +408,7 @@ public class Main extends Application{
         try {
             if(isFirst)
             {
-                loyalCustomer(2);
+                loyalCustomer(primaryStage,2);
             }
             changeStage(primaryStage,2);
         } catch (FileNotFoundException e) {
