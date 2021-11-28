@@ -6,7 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-
+//
 import java.io.FileNotFoundException;
 
 class Counter{
@@ -294,7 +294,7 @@ public class Main extends Application{
     }
 
     private void btn_ITEM_ID() throws FileNotFoundException {
-        if(isFirst == true)
+        if(isFirst)
         {
             //method
         }
@@ -311,13 +311,13 @@ public class Main extends Application{
         String soda = "234567";
         int linecount = project.linecounter();
         while(i < linecount){
-            if(newArray[i][m] == ItemID){
-                if(ItemID == bread){
+            if(newArray[i][m].equals(ItemID)){
+                if(ItemID.equals(bread)){
                     m++;
                     display = display + "Bread" + " "+ newArray[i][m]+"\n";
                     i++;
                 }
-                else if(ItemID == soda){
+                else if(ItemID.equals(soda)){
                     m++;
                     display = display + "Soda" + " "+ newArray[i][m]+"\n";
                     i++;
