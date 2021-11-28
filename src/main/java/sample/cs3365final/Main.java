@@ -1,4 +1,4 @@
-package sample;
+package sample.cs3365final;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -8,7 +8,7 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 import java.io.FileNotFoundException;
-//text text text
+
 class Counter{
     int i=0;
     int m=0;
