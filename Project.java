@@ -10,7 +10,6 @@ class itemInfo{
  String[] itemAmount = new String[5];
  Double[] itemCost = new Double[5];
  double total;
- double temp = 0.0;
 
 }
 

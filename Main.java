@@ -13,6 +13,7 @@ class Counter{
     int i=0;
     int m=0;
     int count=5 ;
+    double total;
 }
 public class Main extends Application{
     Counter counter = new Counter();
@@ -21,12 +22,11 @@ public class Main extends Application{
 
     Stage primaryStage;
     public void start(Stage stage) throws FileNotFoundException {
-        itemInfo tempinfo = new itemInfo();
         primaryStage = stage;
-        changeStage(stage,0, tempinfo);
+        changeStage(stage,0);
     }
 
-    public void changeStage(Stage stage, int newStage, itemInfo tempInfo) throws FileNotFoundException {
+    public void changeStage(Stage stage, int newStage) throws FileNotFoundException {
 
         Project project = new Project();
         String[][] newArray = project.parser();
@@ -173,18 +173,18 @@ public class Main extends Application{
             Label lblCashierDisplay = new Label("---Cashier Display---");
             GridPane.setConstraints(lblCashierDisplay, 7, 3);
 
-            Label lblitem = new Label("Item: "+itemdescription.itemName[counter.i]);
+            Label lblitem = new Label("Item: "+itemdescription.itemName[counter.i]); //prints name of item to cashier display
             GridPane.setConstraints(lblitem, 7, counter.count);
 
 
-            Label lblitemAmount = new Label("Amount: "+itemdescription.itemAmount[counter.m]);
+            Label lblitemAmount = new Label("Amount: "+itemdescription.itemAmount[counter.m]); //prints amount of item to cashier display
             GridPane.setConstraints(lblitemAmount, 8, counter.count);
 
-            //double temp2 = costInfo.itemCost[counter.i];
+            double temp2 = costInfo.itemCost[counter.i]; //calculates total and prints total.
             //System.out.println(""+costInfo.itemCost[counter.i]);
-            //costInfo.temp += temp2;
+            counter.total += temp2;
             //System.out.println(""+costInfo.temp);
-            Label lbltotal = new Label("Total: $"+tempInfo.temp);
+            Label lbltotal = new Label("Total: $"+counter.total);
             GridPane.setConstraints(lbltotal, 7, 10);
 
 
@@ -273,12 +273,8 @@ public class Main extends Application{
     }
 
     private void btn_Scan() throws FileNotFoundException {
-        Project project = new Project();
-        String[][] newArray = project.parser();
-        itemInfo tempInfo = project.calculateCosts(newArray);
-        double temp2 = tempInfo.itemCost[counter.i];
-        tempInfo.temp += temp2;
-        changeStage(primaryStage, 1, tempInfo);
+
+        changeStage(primaryStage, 1);
 
     }
     /*
