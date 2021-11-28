@@ -20,7 +20,7 @@ public class Project{//---------------------------------------------------------
     //parses file and puts into 2d array
     String[][] parser() throws FileNotFoundException {//Reads file and returns a 2D array listArray[item-ID][item amount]
         int linecount = linecounter();
-        File file = new File("C:/Users/Alex/IdeaProjects/SoftEngProject/src/sample/list.txt");
+        File file = new File(System.getProperty("user.dir") + "/sups.txt");
         Scanner scan = new Scanner(file);
 
         //int linecount = linecounter();
@@ -42,7 +42,7 @@ public class Project{//---------------------------------------------------------
     //counts the number of lines in the file
     private int linecounter() throws FileNotFoundException{//reads file and returns the number of lines there are.
         int count = 0;
-        File file = new File("C:/Users/Alex/IdeaProjects/SoftEngProject/src/sample/list.txt"); //point to users file
+        File file = new File(System.getProperty("user.dir") + "/sups.txt"); //point to users file
         Scanner sc = new Scanner(file);
         while(sc.hasNextLine()) {
             sc.nextLine();
