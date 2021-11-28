@@ -13,6 +13,19 @@ class itemInfo{//class to store name, how many of each item, and the prices of e
 
 }
 
+class custInfo
+{
+    String pNum;
+    String memPin;
+    int cP;
+
+    public custInfo(String pNum, String memPin, int cP)
+    {
+        this.pNum = pNum;
+        this.memPin = memPin;
+        this.cP = cP;
+    }
+}
 
 public class Project{//---------------------------------------------------------------Start
 
@@ -20,7 +33,7 @@ public class Project{//---------------------------------------------------------
     //parses file and puts into 2d array
     String[][] parser() throws FileNotFoundException {//Reads file and returns a 2D array listArray[item-ID][item amount]
         int linecount = linecounter();
-        File file = new File(System.getProperty("user.dir") + "/sups.txt");
+        File file = new File(System.getProperty("user.dir") + "/list.txt");;
         Scanner scan = new Scanner(file);
 
         //int linecount = linecounter();
@@ -40,9 +53,9 @@ public class Project{//---------------------------------------------------------
     }
     //----------------------------------------------------------------------------------------
     //counts the number of lines in the file
-    private int linecounter() throws FileNotFoundException{//reads file and returns the number of lines there are.
+    int linecounter() throws FileNotFoundException{//reads file and returns the number of lines there are.
         int count = 0;
-        File file = new File(System.getProperty("user.dir") + "/sups.txt"); //point to users file
+        File file = new File(System.getProperty("user.dir") + "/list.txt"); //point to users file
         Scanner sc = new Scanner(file);
         while(sc.hasNextLine()) {
             sc.nextLine();
