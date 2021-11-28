@@ -13,7 +13,7 @@ class itemInfo{//class to store name, how many of each item, and the prices of e
 
 }
 
-//s
+
 public class Project{//---------------------------------------------------------------Start
 
 
