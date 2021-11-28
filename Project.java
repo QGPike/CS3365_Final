@@ -5,7 +5,7 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 
-class itemInfo{
+class itemInfo{ //class to store name, how many of each item, and the prices of each item.
  String[] itemName = new String[5];
  String[] itemAmount = new String[5];
  Double[] itemCost = new Double[5];
@@ -18,7 +18,7 @@ public class Project{//---------------------------------------------------------
 
 
     //parses file and puts into 2d array
-    String[][] parser() throws FileNotFoundException {
+    String[][] parser() throws FileNotFoundException { //Reads file and returns a 2D array listArray[item-ID][item amount]
         int linecount = linecounter();
         File file = new File("C:/Users/Alex/IdeaProjects/SoftEngProject/src/sample/list.txt");
         Scanner scan = new Scanner(file);
@@ -40,7 +40,7 @@ public class Project{//---------------------------------------------------------
     }
     //----------------------------------------------------------------------------------------
     //counts the number of lines in the file
-    private int linecounter() throws FileNotFoundException{
+    private int linecounter() throws FileNotFoundException{ //reads file and returns the number of lines there are.
         int count = 0;
         File file = new File("C:/Users/Alex/IdeaProjects/SoftEngProject/src/sample/list.txt"); //point to users file
         Scanner sc = new Scanner(file);
@@ -53,9 +53,9 @@ public class Project{//---------------------------------------------------------
     }
     //----------------------------------------------------------------------------------------
     //returns an object that contains the individual costs of the items and
-    itemInfo calculateCosts(String[][] listArray) throws FileNotFoundException {
+    itemInfo calculateCosts(String[][] listArray) throws FileNotFoundException { //detects what items are in the list and stores them into a double array then returns the object.
 
-        itemInfo iteminfo = new itemInfo();
+        itemInfo iteminfo = new itemInfo(); //create object to store double array. 
         int i = 0;
         int m = 0;
         double total = 0.00;
@@ -65,7 +65,7 @@ public class Project{//---------------------------------------------------------
         String amount;
         int linecount = linecounter();
 
-        String bread = "123456";
+        String bread = "123456"; //create variables to store item-ID.
         String soda = "234567";
 
         while (i < linecount) {
@@ -74,7 +74,7 @@ public class Project{//---------------------------------------------------------
                 amount = listArray[i][m];
                 temp = Double.parseDouble(amount);
                 temp = temp * breadPrice;
-                iteminfo.total += temp;
+                //iteminfo.total += temp;
                 iteminfo.itemCost[i] = breadPrice;
 
                 i++;
@@ -86,7 +86,7 @@ public class Project{//---------------------------------------------------------
                 amount = listArray[i][m];
                 temp = Double.parseDouble(amount);
                 temp = temp * sodaPrice;
-                iteminfo.total += temp;
+                //iteminfo.total += temp;
                 iteminfo.itemCost[i] = sodaPrice;
 
                 i++;
@@ -98,7 +98,7 @@ public class Project{//---------------------------------------------------------
 
 
     }
-     itemInfo getDescription(String[][] listArray) throws FileNotFoundException {
+     itemInfo getDescription(String[][] listArray) throws FileNotFoundException { //returns object containing the name of items in array... itemName[name1,name2...]
          itemInfo iteminfo = new itemInfo();
         int i = 0;
         int count = 0;
@@ -108,8 +108,8 @@ public class Project{//---------------------------------------------------------
         String soda = "234567";
 
         while (i < linecount) {
-            if(listArray[i][0].equals(bread)){
-               iteminfo.itemName[count] = "Bread";
+            if(listArray[i][0].equals(bread)){ 
+               iteminfo.itemName[count] = "Bread"; 
                 //m++;
 
                 iteminfo.itemAmount[count] = listArray[i][1];//get amount from listArray
