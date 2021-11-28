@@ -73,13 +73,22 @@ public class Project{//---------------------------------------------------------
         int m = 0;
         double total = 0.00;
         double temp = 0;
+
         double breadPrice = 4.50;
-        double sodaPrice = 1.50;
+        double sodaPrice = 2.50;
+        double blanketPrice = 30.00;
+        double meatPrice = 10.00;
+        double applesPrice = 1.00;
+
         String amount;
         int linecount = linecounter();
 
         String bread = "123456";//create variables to store item-ID.
         String soda = "234567";
+        String blanket = "345678";
+        String meat = "456789";
+        String apples = "567891";
+
 
         while (i < linecount) {
             if (listArray[i][m].equals(bread)) { //check if ID matches.
@@ -106,6 +115,42 @@ public class Project{//---------------------------------------------------------
                 m--;
 
             }
+            else if (listArray[i][m].equals(blanket)) {//check if ID matches.
+                m++;
+                amount = listArray[i][m];
+                temp = Double.parseDouble(amount);
+                temp = temp * blanketPrice;
+                iteminfo.total += temp;
+                iteminfo.itemCost[i] = blanketPrice;
+
+                i++;
+                m--;
+
+            }
+            else if (listArray[i][m].equals(meat)) {//check if ID matches.
+                m++;
+                amount = listArray[i][m];
+                temp = Double.parseDouble(amount);
+                temp = temp * meatPrice;
+                iteminfo.total += temp;
+                iteminfo.itemCost[i] = meatPrice;
+
+                i++;
+                m--;
+
+            }
+            else if (listArray[i][m].equals(apples)) {//check if ID matches.
+                m++;
+                amount = listArray[i][m];
+                temp = Double.parseDouble(amount);
+                temp = temp * applesPrice;
+                iteminfo.total += temp;
+                iteminfo.itemCost[i] = applesPrice;
+
+                i++;
+                m--;
+
+            }
         }
         return iteminfo;
 
@@ -119,6 +164,9 @@ public class Project{//---------------------------------------------------------
         int linecount = linecounter();
         String bread = "123456";
         String soda = "234567";
+        String blanket = "345678";
+        String meat = "456789";
+        String apples = "567891";
 
         while (i < linecount) {
             if(listArray[i][0].equals(bread)){
@@ -133,6 +181,33 @@ public class Project{//---------------------------------------------------------
             }
             else if (listArray[i][0].equals(soda)){
                 iteminfo.itemName[count] = "Soda";
+
+                iteminfo.itemAmount[count] = listArray[i][1];
+                count++;
+                i++;
+
+
+            }
+            else if (listArray[i][0].equals(blanket)){
+                iteminfo.itemName[count] = "blanket";
+
+                iteminfo.itemAmount[count] = listArray[i][1];
+                count++;
+                i++;
+
+
+            }
+            else if (listArray[i][0].equals(meat)){
+                iteminfo.itemName[count] = "meat";
+
+                iteminfo.itemAmount[count] = listArray[i][1];
+                count++;
+                i++;
+
+
+            }
+            else if (listArray[i][0].equals(apples)){
+                iteminfo.itemName[count] = "apples";
 
                 iteminfo.itemAmount[count] = listArray[i][1];
                 count++;
