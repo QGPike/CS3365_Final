@@ -427,6 +427,9 @@ public class Main extends Application{
         int m = 0;
         String bread = "123456";//create variables to store item-ID.
         String soda = "234567";
+        String blanket = "345678";
+        String meat = "456789";
+        String apples = "567891";
         int linecount = project.linecounter();
         while(i < linecount){
             if(newArray[i][m].equals(ItemID)){
@@ -438,6 +441,21 @@ public class Main extends Application{
                 else if(ItemID.equals(soda)){
                     m++;
                     display = display +"Item: "+ "Soda" + " "+"Amount: "+ newArray[i][m]+"\n";
+                    i++;
+                }
+                else if(ItemID.equals(blanket)){
+                    m++;
+                    display = display +"Item: "+ "Blanket" + " "+"Amount: "+ newArray[i][m]+"\n";
+                    i++;
+                }
+                else if(ItemID.equals(meat)){
+                    m++;
+                    display = display +"Item: "+ "Meat" + " "+"Amount: "+ newArray[i][m]+"\n";
+                    i++;
+                }
+                else if(ItemID.equals(apples)){
+                    m++;
+                    display = display +"Item: "+ "Apples" + " "+"Amount: "+ newArray[i][m]+"\n";
                     i++;
                 }
             }
