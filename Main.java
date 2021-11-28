@@ -12,11 +12,12 @@ import java.io.FileNotFoundException;
 class Counter{
     int i=0;
     int m=0;
-    int count=5 ;
+    int count=0 ;
     double total;
 }
 public class Main extends Application{
     Counter counter = new Counter();
+    public String display = "";
 
     public void run(){launch();}
 
@@ -173,12 +174,12 @@ public class Main extends Application{
             Label lblCashierDisplay = new Label("---Cashier Display---");
             GridPane.setConstraints(lblCashierDisplay, 7, 3);
 
-            Label lblitem = new Label("Item: "+itemdescription.itemName[counter.i]); //prints name of item to cashier display
-            GridPane.setConstraints(lblitem, 7, counter.count);
+            Label lblitem = new Label(display); //prints name of item to cashier display
+            GridPane.setConstraints(lblitem, 7, 5);
 
 
-            Label lblitemAmount = new Label("Amount: "+itemdescription.itemAmount[counter.m]); //prints amount of item to cashier display
-            GridPane.setConstraints(lblitemAmount, 8, counter.count);
+            //Label lblitemAmount = new Label("Amount: "+itemdescription.itemAmount[counter.m]); //prints amount of item to cashier display
+            //GridPane.setConstraints(lblitemAmount, 8, counter.count);
 
             double temp2 = costInfo.itemCost[counter.i]; //calculates total and prints total.
             //System.out.println(""+costInfo.itemCost[counter.i]);
@@ -191,13 +192,13 @@ public class Main extends Application{
             Label lblCustomerDisplay = new Label("---Customer Display---");
             GridPane.setConstraints(lblCustomerDisplay, 20, 3);
 
-            Label lblCustomerItem = new Label("Item: "+itemdescription.itemName[counter.i]);
-            GridPane.setConstraints(lblCustomerItem, 20, counter.count);
+            Label lblCustomerItem = new Label(display);
+            GridPane.setConstraints(lblCustomerItem, 20, 5);
 
 
-            Label lblCustomerItemAmount = new Label("Amount: "+itemdescription.itemAmount[counter.m]);
-            GridPane.setConstraints(lblCustomerItemAmount, 21, counter.count);
-            counter.count++;
+            //Label lblCustomerItemAmount = new Label("Amount: "+itemdescription.itemAmount[counter.m]);
+            //GridPane.setConstraints(lblCustomerItemAmount, 21, counter.count);
+            counter.count++; //increment counters
             counter.i++;
             counter.m++;
 
@@ -263,7 +264,7 @@ public class Main extends Application{
             GridPane.setConstraints(num0, 3, 8);
             //Scan.setOnAction(e -> btn_Scale());
 
-            grid.getChildren().addAll(Scan, ITEM_ID, Scale,lblCashierDisplay,lblCustomerDisplay,lblitem,lblitemAmount,lblCustomerItemAmount,lblCustomerItem,lbltotal, num1, num2, num3, num4, num5, num6, num7, num8, num9, num0);
+            grid.getChildren().addAll(Scan, ITEM_ID, Scale,lblCashierDisplay,lblCustomerDisplay,lblitem,lblCustomerItem,lbltotal, num1, num2, num3, num4, num5, num6, num7, num8, num9, num0);
             Scene scene = new Scene(grid, 1000, 1000);
             stage.setScene(scene);
             stage.show();
@@ -273,6 +274,13 @@ public class Main extends Application{
     }
 
     private void btn_Scan() throws FileNotFoundException {
+        Project project = new Project();
+        String[][] newArray = project.parser();
+        itemInfo costInfo = project.calculateCosts(newArray);
+        itemInfo itemdescription = project.getDescription(newArray);
+        System.out.println(itemdescription.itemName[counter.count]);
+        System.out.println(itemdescription.itemAmount[counter.count]);
+        display = display +itemdescription.itemName[counter.count] +" "+ itemdescription.itemAmount[counter.count]+"\n";
 
         changeStage(primaryStage, 1);
 
