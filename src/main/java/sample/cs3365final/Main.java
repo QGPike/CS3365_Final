@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 import java.io.FileNotFoundException;
 class Inventory{
     String[][] itemList;
-    String[][] tempList = new String[5][2];
+    String[][] tempList = new String[100][2];
 
     {
         itemList = new String[][]{{"Bread", "10"},
@@ -630,22 +630,32 @@ public class Main extends Application {
                 if (ItemID.equals(bread)) {
                     m++;
                     display = display + "Item: " + "Bread" + " " + "Amount: " + newArray[i][m] + "\n";
+                    inventory.tempList[counter.count][0] = "Bread";
+                    inventory.tempList[counter.count][1] = newArray[i][m];
                     i++;
                 } else if (ItemID.equals(soda)) {
                     m++;
                     display = display + "Item: " + "Soda" + " " + "Amount: " + newArray[i][m] + "\n";
+                    inventory.tempList[counter.count][0] = "Soda";
+                    inventory.tempList[counter.count][1] = newArray[i][m];
                     i++;
                 } else if (ItemID.equals(blanket)) {
                     m++;
                     display = display + "Item: " + "Blanket" + " " + "Amount: " + newArray[i][m] + "\n";
+                    inventory.tempList[counter.count][0] = "blanket";
+                    inventory.tempList[counter.count][1] = newArray[i][m];
                     i++;
                 } else if (ItemID.equals(meat)) {
                     m++;
                     display = display + "Item: " + "Meat" + " " + "Amount: " + newArray[i][m] + "\n";
+                    inventory.tempList[counter.count][0] = "meat";
+                    inventory.tempList[counter.count][1] = newArray[i][m];
                     i++;
                 } else if (ItemID.equals(apples)) {
                     m++;
                     display = display + "Item: " + "Apples" + " " + "Amount: " + newArray[i][m] + "\n";
+                    inventory.tempList[counter.count][0] = "apples";
+                    inventory.tempList[counter.count][1] = newArray[i][m];
                     i++;
                 }
             } else {
