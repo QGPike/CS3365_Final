@@ -10,6 +10,6 @@ module sample.cs3365final {
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
 
-    opens sample.cs3365final to javafx.fxml;
-    exports sample.cs3365final;
+    opens sample to javafx.fxml;
+    exports sample;
 }
