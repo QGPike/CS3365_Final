@@ -12,11 +12,9 @@ class weights{
         String[][] weights;
 
         {
-            weights = new String[][]{{"Bread", "0.5"},
-                                    {"Soda", "0.25"},
-                                    {"blanket", "2.0"},
-                                    {"meat", "2.12"},
-                                    {"apples", ".25"}};
+            weights = new String[2][2]{{"meat", "0.5"},
+                                    {"apples", "0.25"},
+                                    };
 
         }
 }
@@ -104,11 +102,6 @@ public class Main extends Application {
             });
 
 
-            Button Scale = new Button("Scale");
-            Scale.setStyle("-fx-background-color: MediumSeaGreen");
-            Scale.setMinSize(60, 45);
-            GridPane.setConstraints(Scale, 4, 3);
-            //Scan.setOnAction(e -> btn_Scale());
 
 //--------------------------------------------------------------------displays
             Label lblCashierDisplay = new Label("---Cashier Display---");
@@ -161,7 +154,7 @@ public class Main extends Application {
             Scale.setStyle("-fx-background-color: MediumSeaGreen");
             Scale.setMinSize(60, 45);
             GridPane.setConstraints(Scale, 4, 3);
-            //Scan.setOnAction(e -> btn_Scale());
+            Scale.setOnAction(e -> btn_Scale());
 
 //--------------------------------------------------------------------displays
             Label lblCashierDisplay = new Label("---Cashier Display---");
@@ -888,6 +881,33 @@ public class Main extends Application {
             i++;
         }
         changeStage(primaryStage, 6);
+
+    }
+
+    private void btn_Scale(){
+        int i = 0;
+        double temp;
+        double temp2;
+        double meatPrice = 10.00;
+        double applesPrice = 1.00;
+        if(inventory.tempList[i][0].equals("meat")){
+            temp = Double.parseDouble(weights.weights[i][1]);
+            temp2 = temp * meatPrice;
+            temp += meatPrice + temp2;
+            counter.total += temp;
+
+        }
+        else if(inventory.tempList[i][0].equals("apples")){
+            temp = Double.parseDouble(weights.weights[i][1]);
+            temp2 = temp * meatPrice;
+            counter.total += temp2;
+
+        }
+        try {
+            changeStage(primaryStage,1);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
 
     }
 
