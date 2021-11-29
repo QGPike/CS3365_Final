@@ -8,15 +8,15 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 import java.io.FileNotFoundException;
+
 class weights{
         String[][] weights;
 
-        {
-            weights = new String[2][2]{{"meat", "0.5"},
-                                    {"apples", "0.25"},
-                                    };
-
-        }
+    {
+        weights = new String[][]{{"Bread", "0.5"},
+                {"Soda", "0.25"}
+                };
+    }
 }
 class Inventory{
     String[][] itemList;
