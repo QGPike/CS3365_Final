@@ -32,14 +32,16 @@ class Card
     Boolean isCredit; //if card is debit or credit
     String cPin; //Card pin
     String cnum; //Card number
+    String Auth; //Auth Code
     double balance; //card balance
 
-    public Card(Boolean isCredit, String cPin, String cnum, double balance)
+    public Card(Boolean isCredit, String cPin, String cnum, double balance, String Auth)
     {
         this.isCredit = isCredit;
         this.cPin = cPin;
         this.balance = balance;
         this.cnum = cnum;
+        this.Auth = Auth;
     }
 }
 
