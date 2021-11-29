@@ -1,4 +1,4 @@
-package sample.cs3365final;
+package sample;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -496,7 +496,13 @@ public class Main extends Application {
             Card.setStyle("-fx-background-color: MediumSeaGreen");
             Card.setMinSize(60, 45);
             GridPane.setConstraints(Card, 5, 3);
-            Card.setOnAction(e -> btn_Card());
+            Card.setOnAction(e -> {
+                try {
+                    btn_Card();
+                } catch (FileNotFoundException fileNotFoundException) {
+                    fileNotFoundException.printStackTrace();
+                }
+            });
 
 
 
@@ -504,6 +510,27 @@ public class Main extends Application {
             Scene scene = new Scene(grid, 1000, 1000);
             stage.setScene(scene);
             stage.show();
+        }
+        //-------------------------------------------------------RECEIPT----------------------------------
+        else if(newStage == 6){
+            GridPane grid = new GridPane();
+            grid.setPadding(new Insets(25, 25, 25, 25));
+            grid.setVgap(18);
+            grid.setHgap(10);
+
+            Label lblMessage = new Label("---------------Your Printed Receipt---------------");
+            GridPane.setConstraints(lblMessage, 4, 2);
+            Label lblReceipt = new Label(display);
+            GridPane.setConstraints(lblReceipt, 4, 3);
+            Label lblTotal = new Label("Your Total: $"+counter.total);
+            GridPane.setConstraints(lblTotal, 4, 5);
+
+            grid.getChildren().addAll(lblMessage,lblReceipt,lblTotal);
+            Scene scene = new Scene(grid, 1000, 1000);
+            stage.setScene(scene);
+            stage.show();
+
+
         }
 
     }
@@ -516,7 +543,7 @@ public class Main extends Application {
 
         //System.out.println(itemdescription.itemName[counter.count]);
         //System.out.println(itemdescription.itemAmount[counter.count]);
-        display = display + "Item: " + itemdescription.itemName[counter.count] + " " + "Amount: " + itemdescription.itemAmount[counter.count] + "\n";
+        display = display + "Item: " + itemdescription.itemName[counter.count] + "  " + "Amount: " + itemdescription.itemAmount[counter.count] + "\n";
         //---------------------------------------------------------------------------------------Add the items to a temp array to compare to the inventory later on.
         inventory.tempList[counter.count][0] = itemdescription.itemName[counter.count];
         System.out.println(inventory.tempList[counter.count][0]);
@@ -645,15 +672,19 @@ public class Main extends Application {
 
     }
 
-    private void btn_Card(){//Must check if their card is valid. Check their account balance.
+    private void btn_Card() throws FileNotFoundException {//Must check if their card is valid. Check their account balance.
         //if card is valid then...
         int i = 0;
         int temp;
         int temp2;
         int newAmount;
+        boolean breakloop = true;
         String newString;
-        while(i < counter.count) {
-            if (inventory.tempList[i][0].equals(inventory.itemList[i][0])) {
+        while(i < counter.count || !breakloop) {
+            if(inventory.tempList[i][0] == null){
+                breakloop = false;
+            }
+            else if (inventory.tempList[i][0].equals(inventory.itemList[i][0])) {
                 temp = Integer.parseInt(inventory.itemList[i][1]);
                 temp2 = Integer.parseInt(inventory.tempList[i][1]);
                 newAmount = temp - temp2;
@@ -664,6 +695,7 @@ public class Main extends Application {
             }
             i++;
         }
+        changeStage(primaryStage, 6);
 
     }
 
