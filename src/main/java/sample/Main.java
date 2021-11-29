@@ -529,6 +529,7 @@ public class Main extends Application {
             grid.setPadding(new Insets(25, 25, 25, 25));
             grid.setVgap(18);
             grid.setHgap(10);
+            double rewards = 0;
 
             Label lblMessage = new Label("---------------Your Printed Receipt---------------");
             GridPane.setConstraints(lblMessage, 4, 2);
@@ -537,7 +538,19 @@ public class Main extends Application {
             Label lblTotal = new Label("Your Total: $"+counter.total);
             GridPane.setConstraints(lblTotal, 4, 5);
 
-            grid.getChildren().addAll(lblMessage,lblReceipt,lblTotal);
+            if(isLoyal)
+            {
+                rewards = (Jim.cP + (counter.total / 10));
+            }
+            else
+            {
+                rewards = counter.total / 10;
+            }
+
+            Label lblrewardsPoints = new Label("Rewards Points: " + rewards);
+            GridPane.setConstraints(lblrewardsPoints, 4, 6);
+
+            grid.getChildren().addAll(lblMessage,lblReceipt,lblTotal, lblrewardsPoints);
             Scene scene = new Scene(grid, 1000, 1000);
             stage.setScene(scene);
             stage.show();
