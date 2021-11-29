@@ -518,7 +518,7 @@ public class Main extends Application {
 
 
 
-            grid.getChildren().addAll(lblSelectPayment, Cash,Card);
+            grid.getChildren().addAll(lblSelectPayment, Cash,Card, Check);
             Scene scene = new Scene(grid, 1000, 1000);
             stage.setScene(scene);
             stage.show();
