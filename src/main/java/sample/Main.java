@@ -489,13 +489,20 @@ public class Main extends Application {
             Cash.setStyle("-fx-background-color: MediumSeaGreen");
             Cash.setMinSize(60, 45);
             GridPane.setConstraints(Cash, 2, 3);
-            //Cash.setOnAction(e -> btn_Cash);
+            Cash.setOnAction(e -> {
+                try {
+                    btn_Cash();
+                } catch (FileNotFoundException fileNotFoundException) {
+                    fileNotFoundException.printStackTrace();
+                }
+            });
+
 
             Button Check = new Button("Check");
             Check.setStyle("-fx-background-color: MediumSeaGreen");
             Check.setMinSize(60, 45);
-            GridPane.setConstraints(Check, 3, 3);
-            Cash.setOnAction(e -> {
+            GridPane.setConstraints(Check, 5, 3);
+            Check.setOnAction(e -> {
                 try {
                     btn_Check();
                 } catch (FileNotFoundException fileNotFoundException) {
@@ -671,14 +678,45 @@ public class Main extends Application {
 
             Label lblrewardsPoints = new Label("Rewards Points: " + rewards);
             GridPane.setConstraints(lblrewardsPoints, 4, 5);
-            Label lblCnum = new Label("Card #: " + jimCard.cnum);
+            Label lblCnum = new Label("Date: 11/11/2011      Time: 11:11PM     Store ID: 1        Cashier ID: 63       Order #: 7");
             GridPane.setConstraints(lblCnum, 4, 6);
-            Label lblAuth = new Label("Authorization #: " + jimCard.Auth);
-            GridPane.setConstraints(lblAuth, 4, 7);
             Label lblTotal = new Label("Your Total: $"+counter.total);
             GridPane.setConstraints(lblTotal, 4, 8);
 
-            grid.getChildren().addAll(lblMessage,lblReceipt,lblTotal, lblrewardsPoints, lblCnum, lblAuth);
+            grid.getChildren().addAll(lblMessage,lblReceipt,lblTotal, lblrewardsPoints, lblCnum);
+            Scene scene = new Scene(grid, 1000, 1000);
+            stage.setScene(scene);
+            stage.show();
+
+
+        }
+        else if(newStage == 9){
+            GridPane grid = new GridPane();
+            grid.setPadding(new Insets(25, 25, 25, 25));
+            grid.setVgap(18);
+            grid.setHgap(10);
+            double rewards = 0;
+
+            Label lblMessage = new Label("---------------Your Printed Receipt---------------");
+            GridPane.setConstraints(lblMessage, 4, 2);
+            Label lblReceipt = new Label(display);
+            GridPane.setConstraints(lblReceipt, 4, 3);
+            Label lblTotal = new Label("Your Total: $"+counter.total);
+            GridPane.setConstraints(lblTotal, 4, 6);
+
+            if(isLoyal)
+            {
+                rewards = (Jim.cP + (counter.total / 10));
+            }
+            else
+            {
+                rewards = counter.total / 10;
+            }
+
+            Label lblrewardsPoints = new Label("Rewards Points: " + rewards);
+            GridPane.setConstraints(lblrewardsPoints, 4, 5);
+
+            grid.getChildren().addAll(lblMessage,lblReceipt,lblTotal, lblrewardsPoints);
             Scene scene = new Scene(grid, 1000, 1000);
             stage.setScene(scene);
             stage.show();
@@ -905,6 +943,11 @@ public class Main extends Application {
 
 
     }
+
+    private void btn_Cash() throws FileNotFoundException {
+        changeStage(primaryStage, 6);
+    }
+
     private void btn_Check() throws FileNotFoundException {//Must check if their card is valid. Check their account balance.
         //if Check is valid then...
         int i = 0;
@@ -928,7 +971,7 @@ public class Main extends Application {
             }
             i++;
         }
-        changeStage(primaryStage, 6);
+        changeStage(primaryStage, 8);
 
     }
 
