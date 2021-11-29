@@ -50,7 +50,7 @@ public class Main extends Application {
     public String phoneN = "";
     public String custPin = "";
     custInfo Jim = new custInfo("1234567890", "1234", 11); //sample acct
-    Card jimCard = new Card(false, "1234", "1234567980123456", 999999999);
+    Card jimCard = new Card(false, "1234", "1234567980123456", 999999999, "12");
 
     public void run() {
         launch();
