@@ -23,7 +23,7 @@ class custInfo //Holds sample account data to be used in demo
     {
         this.pNum = pNum;
         this.memPin = memPin;
-        
+        this.cP = cP;
     }
 }
 
