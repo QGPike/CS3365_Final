@@ -587,61 +587,61 @@ public class Main extends Application {
             num1.setStyle("-fx-background-color: MediumSeaGreen");
             num1.setMinSize(60, 45);
             GridPane.setConstraints(num1, 2, 5);
-            num1.setOnAction(e -> btn_NumpadPin(1));
+            num1.setOnAction(e -> btn_NumpadPin2(1));
 
             Button num2 = new Button("2");
             num2.setStyle("-fx-background-color: MediumSeaGreen");
             num2.setMinSize(60, 45);
             GridPane.setConstraints(num2, 3, 5);
-            num2.setOnAction(e -> btn_NumpadPin(2));
+            num2.setOnAction(e -> btn_NumpadPin2(2));
 
             Button num3 = new Button("3");
             num3.setStyle("-fx-background-color: MediumSeaGreen");
             num3.setMinSize(60, 45);
             GridPane.setConstraints(num3, 4, 5);
-            num3.setOnAction(e -> btn_NumpadPin(3));
+            num3.setOnAction(e -> btn_NumpadPin2(3));
 
             Button num4 = new Button("4");
             num4.setStyle("-fx-background-color: MediumSeaGreen");
             num4.setMinSize(60, 45);
             GridPane.setConstraints(num4, 2, 6);
-            num4.setOnAction(e -> btn_NumpadPin(4));
+            num4.setOnAction(e -> btn_NumpadPin2(4));
 
             Button num5 = new Button("5");
             num5.setStyle("-fx-background-color: MediumSeaGreen");
             num5.setMinSize(60, 45);
             GridPane.setConstraints(num5, 3, 6);
-            num5.setOnAction(e -> btn_NumpadPin(5));
+            num5.setOnAction(e -> btn_NumpadPin2(5));
 
             Button num6 = new Button("6");
             num6.setStyle("-fx-background-color: MediumSeaGreen");
             num6.setMinSize(60, 45);
             GridPane.setConstraints(num6, 4, 6);
-            num6.setOnAction(e -> btn_NumpadPin(6));
+            num6.setOnAction(e -> btn_NumpadPin2(6));
 
             Button num7 = new Button("7");
             num7.setStyle("-fx-background-color: MediumSeaGreen");
             num7.setMinSize(60, 45);
             GridPane.setConstraints(num7, 2, 7);
-            num7.setOnAction(e -> btn_NumpadPin(7));
+            num7.setOnAction(e -> btn_NumpadPin2(7));
 
             Button num8 = new Button("8");
             num8.setStyle("-fx-background-color: MediumSeaGreen");
             num8.setMinSize(60, 45);
             GridPane.setConstraints(num8, 3, 7);
-            num8.setOnAction(e -> btn_NumpadPin(8));
+            num8.setOnAction(e -> btn_NumpadPin2(8));
 
             Button num9 = new Button("9");
             num9.setStyle("-fx-background-color: MediumSeaGreen");
             num9.setMinSize(60, 45);
             GridPane.setConstraints(num9, 4, 7);
-            num9.setOnAction(e -> btn_NumpadPin(9));
+            num9.setOnAction(e -> btn_NumpadPin2(9));
 
             Button num0 = new Button("0");
             num0.setStyle("-fx-background-color: MediumSeaGreen");
             num0.setMinSize(60, 45);
             GridPane.setConstraints(num0, 3, 8);
-            num0.setOnAction(e -> btn_NumpadPin(0));
+            num0.setOnAction(e -> btn_NumpadPin2(0));
 
             grid.getChildren().addAll(Verify, lblNumpad, lblNumber, num1, num2, num3, num4, num5, num6, num7, num8, num9, num0);
             Scene scene = new Scene(grid, 1000, 1000);
@@ -672,9 +672,9 @@ public class Main extends Application {
             Label lblrewardsPoints = new Label("Rewards Points: " + rewards);
             GridPane.setConstraints(lblrewardsPoints, 4, 5);
             Label lblCnum = new Label("Card #: " + jimCard.cnum);
-            GridPane.setConstraints(lblrewardsPoints, 4, 6);
-            Label lblAuth = new Label("Rewards Points: " + jimCard.Auth);
-            GridPane.setConstraints(lblrewardsPoints, 4, 7);
+            GridPane.setConstraints(lblCnum, 4, 6);
+            Label lblAuth = new Label("Authorization #: " + jimCard.Auth);
+            GridPane.setConstraints(lblAuth, 4, 7);
             Label lblTotal = new Label("Your Total: $"+counter.total);
             GridPane.setConstraints(lblTotal, 4, 8);
 
@@ -736,8 +736,20 @@ public class Main extends Application {
     private void btn_NumpadPin(int number) //Passes in Pin Input
     {
         custPin = custPin + Integer.toString(number);
+        System.out.println(custPin);
         try {
             changeStage(primaryStage, 4);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void btn_NumpadPin2(int number) //Passes in Pin Input
+    {
+        custPin = custPin + Integer.toString(number);
+        System.out.println(custPin);
+        try {
+            changeStage(primaryStage, 7);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -836,12 +848,15 @@ public class Main extends Application {
 
     private void btn_numpadVerifyBank() throws FileNotFoundException
     {
+        System.out.println("here1");
         if(custPin.equals(jimCard.cPin))
         {
+            System.out.println("here2");
             changeStage(primaryStage, 8);
         }
         else
         {
+            System.out.println("here3");
             changeStage(primaryStage, 5);
         }
     }
