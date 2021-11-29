@@ -44,11 +44,13 @@ public class Main extends Application {
     public sample.Inventory inventory = new sample.Inventory();
     public boolean isFirst = true; //tracks first scan for loyalty acct
     public boolean isLoyal = false; //tracks the need to add loyalty points
+    public boolean isCard = false; //sets the need to print card number on Reciept
     public String display = "";
     public String ItemID = "";
     public String phoneN = "";
     public String custPin = "";
     custInfo Jim = new custInfo("1234567890", "1234", 11); //sample acct
+    Card jimCard = new Card(false, "1234", "1234567980123456", 999999999);
 
     public void run() {
         launch();
@@ -569,6 +571,98 @@ public class Main extends Application {
 
 
         }
+        else if (newStage == 7) {
+            isFirst = false;
+            stage.setTitle("Enter Card Pin with the Numpad");
+            GridPane grid = new GridPane();
+            grid.setPadding(new Insets(25, 25, 25, 25));
+            grid.setVgap(18);
+            grid.setHgap(10);
+
+
+///////////////////////////////////NUMPAD///////////////////////////////////
+            Label lblNumpad = new Label("PIN:");
+            GridPane.setConstraints(lblNumpad, 3, 9);
+            Label lblNumber = new Label(custPin);
+            GridPane.setConstraints(lblNumber, 4, 9);
+
+            Button Verify = new Button("Verify");
+            Verify.setStyle("-fx-background-color: MediumSeaGreen");
+            Verify.setMinSize(60, 45);
+            GridPane.setConstraints(Verify, 4, 3);
+            Verify.setOnAction(e -> {
+                try {
+                    btn_numpadVerifyBank();
+                } catch (FileNotFoundException ex) {
+                    ex.printStackTrace();
+                }
+            });
+
+            Button num1 = new Button("1");
+            num1.setStyle("-fx-background-color: MediumSeaGreen");
+            num1.setMinSize(60, 45);
+            GridPane.setConstraints(num1, 2, 5);
+            num1.setOnAction(e -> btn_NumpadPin(1));
+
+            Button num2 = new Button("2");
+            num2.setStyle("-fx-background-color: MediumSeaGreen");
+            num2.setMinSize(60, 45);
+            GridPane.setConstraints(num2, 3, 5);
+            num2.setOnAction(e -> btn_NumpadPin(2));
+
+            Button num3 = new Button("3");
+            num3.setStyle("-fx-background-color: MediumSeaGreen");
+            num3.setMinSize(60, 45);
+            GridPane.setConstraints(num3, 4, 5);
+            num3.setOnAction(e -> btn_NumpadPin(3));
+
+            Button num4 = new Button("4");
+            num4.setStyle("-fx-background-color: MediumSeaGreen");
+            num4.setMinSize(60, 45);
+            GridPane.setConstraints(num4, 2, 6);
+            num4.setOnAction(e -> btn_NumpadPin(4));
+
+            Button num5 = new Button("5");
+            num5.setStyle("-fx-background-color: MediumSeaGreen");
+            num5.setMinSize(60, 45);
+            GridPane.setConstraints(num5, 3, 6);
+            num5.setOnAction(e -> btn_NumpadPin(5));
+
+            Button num6 = new Button("6");
+            num6.setStyle("-fx-background-color: MediumSeaGreen");
+            num6.setMinSize(60, 45);
+            GridPane.setConstraints(num6, 4, 6);
+            num6.setOnAction(e -> btn_NumpadPin(6));
+
+            Button num7 = new Button("7");
+            num7.setStyle("-fx-background-color: MediumSeaGreen");
+            num7.setMinSize(60, 45);
+            GridPane.setConstraints(num7, 2, 7);
+            num7.setOnAction(e -> btn_NumpadPin(7));
+
+            Button num8 = new Button("8");
+            num8.setStyle("-fx-background-color: MediumSeaGreen");
+            num8.setMinSize(60, 45);
+            GridPane.setConstraints(num8, 3, 7);
+            num8.setOnAction(e -> btn_NumpadPin(8));
+
+            Button num9 = new Button("9");
+            num9.setStyle("-fx-background-color: MediumSeaGreen");
+            num9.setMinSize(60, 45);
+            GridPane.setConstraints(num9, 4, 7);
+            num9.setOnAction(e -> btn_NumpadPin(9));
+
+            Button num0 = new Button("0");
+            num0.setStyle("-fx-background-color: MediumSeaGreen");
+            num0.setMinSize(60, 45);
+            GridPane.setConstraints(num0, 3, 8);
+            num0.setOnAction(e -> btn_NumpadPin(0));
+
+            grid.getChildren().addAll(Verify, lblNumpad, lblNumber, num1, num2, num3, num4, num5, num6, num7, num8, num9, num0);
+            Scene scene = new Scene(grid, 1000, 1000);
+            stage.setScene(scene);
+            stage.show();
+        }
 
     }
 
@@ -644,8 +738,10 @@ public class Main extends Application {
     {
         if (Jim.memPin.equals(custPin)) {
             isLoyal = true;
+            custPin = "";
             changeStage(primaryStage, 1);
         } else {
+            custPin = "";
             changeStage(primaryStage, 1);
         }
     }
@@ -712,7 +808,18 @@ public class Main extends Application {
 
 
 
+
     }
+
+
+    private void btn_numpadVerifyBank() throws FileNotFoundException
+    {
+        if(custPin.equals(jimCard.cPin))
+        {
+
+        }
+    }
+
     private void btn_total() throws FileNotFoundException {
         System.out.println(inventory.tempList[0][0]);
         changeStage(primaryStage, 5);
@@ -727,6 +834,7 @@ public class Main extends Application {
         int newAmount;
         boolean breakloop = true;
         String newString;
+        isCard = true;
 
         while(i < counter.count || !breakloop) {
             if(inventory.tempList[i][0] == null){
@@ -743,7 +851,17 @@ public class Main extends Application {
             }
             i++;
         }
-        changeStage(primaryStage, 6);
+
+        if(jimCard.isCredit)
+        {
+            changeStage(primaryStage, 6);
+
+        }
+        else
+        {
+            changeStage(primaryStage, 7);
+        }
+
 
     }
     private void btn_Check() throws FileNotFoundException {//Must check if their card is valid. Check their account balance.

@@ -23,7 +23,7 @@ class custInfo //Holds sample account data to be used in demo
     {
         this.pNum = pNum;
         this.memPin = memPin;
-        this.cP = cP;
+        
     }
 }
 
@@ -31,13 +31,15 @@ class Card
 {
     Boolean isCredit; //if card is debit or credit
     String cPin; //Card pin
+    String cnum; //Card number
     double balance; //card balance
 
-    public Card(Boolean isCredit, String cPin, double balance)
+    public Card(Boolean isCredit, String cPin, String cnum, double balance)
     {
         this.isCredit = isCredit;
         this.cPin = cPin;
         this.balance = balance;
+        this.cnum = cnum;
     }
 }
 
