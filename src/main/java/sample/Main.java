@@ -483,19 +483,19 @@ public class Main extends Application {
             grid.setHgap(10);
 
             Label lblSelectPayment = new Label("Select a Payment Option:");
-            GridPane.setConstraints(lblSelectPayment, 4, 2);
+            GridPane.setConstraints(lblSelectPayment, 3, 2);
 
 
             Button Cash = new Button("Cash");
             Cash.setStyle("-fx-background-color: MediumSeaGreen");
             Cash.setMinSize(60, 45);
-            GridPane.setConstraints(Cash, 4, 3);
+            GridPane.setConstraints(Cash, 2, 3);
             //Cash.setOnAction(e -> btn_Cash);
 
             Button Check = new Button("Check");
             Check.setStyle("-fx-background-color: MediumSeaGreen");
             Check.setMinSize(60, 45);
-            GridPane.setConstraints(Check, 4, 3);
+            GridPane.setConstraints(Check, 3, 3);
             Cash.setOnAction(e -> {
                 try {
                     btn_Check();
@@ -507,7 +507,7 @@ public class Main extends Application {
             Button Card = new Button("Card");
             Card.setStyle("-fx-background-color: MediumSeaGreen");
             Card.setMinSize(60, 45);
-            GridPane.setConstraints(Card, 5, 3);
+            GridPane.setConstraints(Card, 4, 3);
             Card.setOnAction(e -> {
                 try {
                     btn_Card();
