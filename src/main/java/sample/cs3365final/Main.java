@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 import java.io.FileNotFoundException;
 class Inventory{
     String[][] itemList;
-    String[][] tempList = new String[100][2];
+    String[][] tempList = new String[5][2];
 
     {
         itemList = new String[][]{{"Bread", "10"},
@@ -476,7 +476,7 @@ public class Main extends Application {
         }
 
         else if(newStage == 5){
-            stage.setTitle("Pay With Cash or Card");
+            stage.setTitle("Pay With Cash, Check, or Card");
             GridPane grid = new GridPane();
             grid.setPadding(new Insets(25, 25, 25, 25));
             grid.setVgap(18);
@@ -491,6 +491,18 @@ public class Main extends Application {
             Cash.setMinSize(60, 45);
             GridPane.setConstraints(Cash, 4, 3);
             //Cash.setOnAction(e -> btn_Cash);
+
+            Button Check = new Button("Check");
+            Check.setStyle("-fx-background-color: MediumSeaGreen");
+            Check.setMinSize(60, 45);
+            GridPane.setConstraints(Check, 4, 3);
+            Cash.setOnAction(e -> {
+                try {
+                    btn_Check();
+                } catch (FileNotFoundException fileNotFoundException) {
+                    fileNotFoundException.printStackTrace();
+                }
+            });
 
             Button Card = new Button("Card");
             Card.setStyle("-fx-background-color: MediumSeaGreen");
@@ -684,6 +696,33 @@ public class Main extends Application {
 
     private void btn_Card() throws FileNotFoundException {//Must check if their card is valid. Check their account balance.
         //if card is valid then...
+        int i = 0;
+        int temp;
+        int temp2;
+        int newAmount;
+        boolean breakloop = true;
+        String newString;
+
+        while(i < counter.count || !breakloop) {
+            if(inventory.tempList[i][0] == null){
+                breakloop = false;
+            }
+            else if (inventory.tempList[i][0].equals(inventory.itemList[i][0])) {
+                temp = Integer.parseInt(inventory.itemList[i][1]);
+                temp2 = Integer.parseInt(inventory.tempList[i][1]);
+                newAmount = temp - temp2;
+                newString = Integer.toString(newAmount);
+                inventory.itemList[i][1] = newString;
+                System.out.println("New Inventory Amount for "+ inventory.itemList[i][0] + " is "+ inventory.itemList[i][1]+ "\n");
+
+            }
+            i++;
+        }
+        changeStage(primaryStage, 6);
+
+    }
+    private void btn_Check() throws FileNotFoundException {//Must check if their card is valid. Check their account balance.
+        //if Check is valid then...
         int i = 0;
         int temp;
         int temp2;
