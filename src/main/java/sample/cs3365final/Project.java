@@ -66,9 +66,9 @@ public class Project{//---------------------------------------------------------
     }
     //----------------------------------------------------------------------------------------
     //returns an object that contains the individual costs of the items and
-    itemInfo calculateCosts(String[][] listArray) throws FileNotFoundException {//detects what items are in the list and stores them into a double array then returns the object
+    sample.itemInfo calculateCosts(String[][] listArray) throws FileNotFoundException {//detects what items are in the list and stores them into a double array then returns the object
 
-        itemInfo iteminfo = new itemInfo();//create object to store double array.
+        sample.itemInfo iteminfo = new sample.itemInfo();//create object to store double array.
         int i = 0;
         int m = 0;
         double total = 0.00;
@@ -156,8 +156,8 @@ public class Project{//---------------------------------------------------------
 
 
     }
-    itemInfo getDescription(String[][] listArray) throws FileNotFoundException {//returns object containing the name of items in array... itemName[name1,name2...]
-        itemInfo iteminfo = new itemInfo();
+    sample.itemInfo getDescription(String[][] listArray) throws FileNotFoundException {//returns object containing the name of items in array... itemName[name1,name2...]
+        sample.itemInfo iteminfo = new sample.itemInfo();
         int i = 0;
         int count = 0;
         // String[][] tempArray = new String[0][0];
@@ -221,3 +221,4 @@ public class Project{//---------------------------------------------------------
     }
 
 }//-----------------------------------------------------------------------End
+

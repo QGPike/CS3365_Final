@@ -8,15 +8,28 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 import java.io.FileNotFoundException;
+class Inventory{
+    String[][] itemList;
+    String[][] tempList = new String[5][2];
 
+    {
+        itemList = new String[][]{{"Bread", "10"},
+                {"Soda","12"},
+                {"blanket", "7"},
+                {"meat","10"},
+                {"apples","10"}};
+    }
+}
 class Counter{
     int i=0;
     int m=0;
+    int n=0;
     int count=0 ;
     double total;
 }
-public class Main extends Application{
-    Counter counter = new Counter();
+public class Main extends Application {
+    sample.Counter counter = new sample.Counter();
+    public sample.Inventory inventory = new sample.Inventory();
     public boolean isFirst = true; //tracks first scan for loyalty acct
     public boolean isLoyal = false; //tracks the need to add loyalty points
     public String display = "";
@@ -24,14 +37,17 @@ public class Main extends Application{
     public String phoneN = "";
     public String custPin = "";
     custInfo Jim = new custInfo("1234567890", "1234", 11); //sample acct
-    public void run(){launch();}
 
-    Stage primaryStage;
-    public void start(Stage stage) throws FileNotFoundException {
-        primaryStage = stage;
-        changeStage(stage,0);
+    public void run() {
+        launch();
     }
 
+    Stage primaryStage;
+
+    public void start(Stage stage) throws FileNotFoundException {
+        primaryStage = stage;
+        changeStage(stage, 0);
+    }
 
 
     public void changeStage(Stage stage, int newStage) throws FileNotFoundException {
@@ -41,7 +57,7 @@ public class Main extends Application{
         itemInfo costInfo = project.calculateCosts(newArray);
         itemInfo itemdescription = project.getDescription(newArray);
 
-        if(newStage == 0) {
+        if (newStage == 0) {
             stage.setTitle("Cash Register");
             GridPane grid = new GridPane();
             grid.setPadding(new Insets(25, 25, 25, 25));
@@ -86,14 +102,14 @@ public class Main extends Application{
             Label lblCustomerDisplay = new Label("---Customer Display---");
             GridPane.setConstraints(lblCustomerDisplay, 25, 3);
 
-            grid.getChildren().addAll(Scan, ITEM_ID, Scale,lblCashierDisplay,lblCustomerDisplay);
+            grid.getChildren().addAll(Scan, ITEM_ID, Scale, lblCashierDisplay, lblCustomerDisplay);
             Scene scene = new Scene(grid, 1000, 1000);
             stage.setScene(scene);
             stage.show();
 
         }
         //-----------------------------------> If stage 1 then item is automatically scanned and displayed
-        else if(newStage == 1){
+        else if (newStage == 1) {
 
 
             stage.setTitle("Cash Register");
@@ -127,7 +143,6 @@ public class Main extends Application{
             });
 
 
-
             Button Scale = new Button("Scale");
             Scale.setStyle("-fx-background-color: MediumSeaGreen");
             Scale.setMinSize(60, 45);
@@ -146,8 +161,18 @@ public class Main extends Application{
             //System.out.println(""+costInfo.itemCost[counter.i]);
             counter.total += temp2;
             //System.out.println(""+costInfo.temp);
-            Label lbltotal = new Label("Total: $"+counter.total);
-            GridPane.setConstraints(lbltotal, 7, 10);
+
+            Button btn_total = new Button("Total: $" + counter.total);
+            btn_total.setStyle("-fx-background-color: MediumSeaGreen");
+            btn_total.setMinSize(60, 45);
+            GridPane.setConstraints(btn_total, 7, 10);
+            btn_total.setOnAction(e -> {
+                try {
+                    btn_total();
+                } catch (FileNotFoundException fileNotFoundException) {
+                    fileNotFoundException.printStackTrace();
+                }
+            });
 
 
             Label lblCustomerDisplay = new Label("---Customer Display---");
@@ -157,12 +182,11 @@ public class Main extends Application{
             GridPane.setConstraints(lblCustomerItem, 20, 5);
 
 
-
             counter.count++; //increment counters
             counter.i++;
             counter.m++;
 
-            grid.getChildren().addAll(Scan, ITEM_ID, Scale,lblCashierDisplay,lblCustomerDisplay,lblitem,lblCustomerItem,lbltotal);
+            grid.getChildren().addAll(Scan, ITEM_ID, Scale, lblCashierDisplay, lblCustomerDisplay, lblitem, lblCustomerItem, btn_total);
             Scene scene = new Scene(grid, 1000, 1000);
             stage.setScene(scene);
             stage.show();
@@ -170,7 +194,7 @@ public class Main extends Application{
         }
 
         //--------------------------------------------------------------------------------------ITEM-ID
-        else if(newStage == 2){
+        else if (newStage == 2) {
             stage.setTitle("Enter Item ID With the Numpad");
             GridPane grid = new GridPane();
             grid.setPadding(new Insets(25, 25, 25, 25));
@@ -200,7 +224,7 @@ public class Main extends Application{
             Label lblNumpad = new Label("NUMPAD:");
             GridPane.setConstraints(lblNumpad, 3, 9);
             Label lblNumber = new Label(ItemID);
-            GridPane.setConstraints(lblNumber, 4,9 );
+            GridPane.setConstraints(lblNumber, 4, 9);
 
 
             Button num1 = new Button("1");
@@ -263,12 +287,11 @@ public class Main extends Application{
             GridPane.setConstraints(num0, 3, 8);
             num0.setOnAction(e -> btn_Numpad(0));
 
-            grid.getChildren().addAll(Scale,lblNumpad,lblNumber,Enter, num1, num2, num3, num4, num5, num6, num7, num8, num9, num0);
+            grid.getChildren().addAll(Scale, lblNumpad, lblNumber, Enter, num1, num2, num3, num4, num5, num6, num7, num8, num9, num0);
             Scene scene = new Scene(grid, 1000, 1000);
             stage.setScene(scene);
             stage.show();
-        }
-        else if(newStage == 3){
+        } else if (newStage == 3) {
             isFirst = false;
             stage.setTitle("Enter Phone Number With the Numpad");
             GridPane grid = new GridPane();
@@ -281,7 +304,7 @@ public class Main extends Application{
             Label lblNumpad = new Label("PHONE:");
             GridPane.setConstraints(lblNumpad, 3, 9);
             Label lblNumber = new Label(phoneN);
-            GridPane.setConstraints(lblNumber, 4,9 );
+            GridPane.setConstraints(lblNumber, 4, 9);
 
             Button Verify = new Button("Verify");
             Verify.setStyle("-fx-background-color: MediumSeaGreen");
@@ -355,12 +378,11 @@ public class Main extends Application{
             GridPane.setConstraints(num0, 3, 8);
             num0.setOnAction(e -> btn_NumpadPhone(0));
 
-            grid.getChildren().addAll(Verify, lblNumpad,lblNumber, num1, num2, num3, num4, num5, num6, num7, num8, num9, num0);
+            grid.getChildren().addAll(Verify, lblNumpad, lblNumber, num1, num2, num3, num4, num5, num6, num7, num8, num9, num0);
             Scene scene = new Scene(grid, 1000, 1000);
             stage.setScene(scene);
             stage.show();
-        }
-        else if(newStage == 4){
+        } else if (newStage == 4) {
             isFirst = false;
             stage.setTitle("Enter Loyalty Pin with the Numpad");
             GridPane grid = new GridPane();
@@ -373,7 +395,7 @@ public class Main extends Application{
             Label lblNumpad = new Label("PIN:");
             GridPane.setConstraints(lblNumpad, 3, 9);
             Label lblNumber = new Label(custPin);
-            GridPane.setConstraints(lblNumber, 4,9 );
+            GridPane.setConstraints(lblNumber, 4, 9);
 
             Button Verify = new Button("Verify");
             Verify.setStyle("-fx-background-color: MediumSeaGreen");
@@ -447,7 +469,38 @@ public class Main extends Application{
             GridPane.setConstraints(num0, 3, 8);
             num0.setOnAction(e -> btn_NumpadPin(0));
 
-            grid.getChildren().addAll(Verify, lblNumpad,lblNumber, num1, num2, num3, num4, num5, num6, num7, num8, num9, num0);
+            grid.getChildren().addAll(Verify, lblNumpad, lblNumber, num1, num2, num3, num4, num5, num6, num7, num8, num9, num0);
+            Scene scene = new Scene(grid, 1000, 1000);
+            stage.setScene(scene);
+            stage.show();
+        }
+
+        else if(newStage == 5){
+            stage.setTitle("Pay With Cash or Card");
+            GridPane grid = new GridPane();
+            grid.setPadding(new Insets(25, 25, 25, 25));
+            grid.setVgap(18);
+            grid.setHgap(10);
+
+            Label lblSelectPayment = new Label("Select a Payment Option:");
+            GridPane.setConstraints(lblSelectPayment, 4, 2);
+
+
+            Button Cash = new Button("Cash");
+            Cash.setStyle("-fx-background-color: MediumSeaGreen");
+            Cash.setMinSize(60, 45);
+            GridPane.setConstraints(Cash, 4, 3);
+            //Cash.setOnAction(e -> btn_Cash);
+
+            Button Card = new Button("Card");
+            Card.setStyle("-fx-background-color: MediumSeaGreen");
+            Card.setMinSize(60, 45);
+            GridPane.setConstraints(Card, 5, 3);
+            Card.setOnAction(e -> btn_Card());
+
+
+
+            grid.getChildren().addAll(lblSelectPayment, Cash,Card);
             Scene scene = new Scene(grid, 1000, 1000);
             stage.setScene(scene);
             stage.show();
@@ -459,18 +512,24 @@ public class Main extends Application{
     private void btn_Scan() throws FileNotFoundException {
         Project project = new Project();
         String[][] newArray = project.parser();
-        itemInfo costInfo = project.calculateCosts(newArray);
         itemInfo itemdescription = project.getDescription(newArray);
-        System.out.println(itemdescription.itemName[counter.count]);
-        System.out.println(itemdescription.itemAmount[counter.count]);
-        display = display +"Item: "+itemdescription.itemName[counter.count] +" "+"Amount: "+ itemdescription.itemAmount[counter.count]+"\n";
 
-        if(isFirst) //Checks if this is the first button press
+        //System.out.println(itemdescription.itemName[counter.count]);
+        //System.out.println(itemdescription.itemAmount[counter.count]);
+        display = display + "Item: " + itemdescription.itemName[counter.count] + " " + "Amount: " + itemdescription.itemAmount[counter.count] + "\n";
+        //---------------------------------------------------------------------------------------Add the items to a temp array to compare to the inventory later on.
+        inventory.tempList[counter.count][0] = itemdescription.itemName[counter.count];
+        System.out.println(inventory.tempList[counter.count][0]);
+        inventory.tempList[counter.count][1] = itemdescription.itemAmount[counter.count];
+        System.out.println(inventory.tempList[counter.count][1]);
+
+
+
+
+        if (isFirst) //Checks if this is the first button press
         {
             changeStage(primaryStage, 3);
-        }
-        else
-        {
+        } else {
             changeStage(primaryStage, 1);
         }
     }
@@ -479,16 +538,16 @@ public class Main extends Application{
     {
         phoneN = phoneN + Integer.toString(number);
         try {
-            changeStage(primaryStage,3);
+            changeStage(primaryStage, 3);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
     }
 
-    private void btn_Numpad(int number){//passes whatever number is pressed
+    private void btn_Numpad(int number) {//passes whatever number is pressed
         ItemID = ItemID + Integer.toString(number);
         try {
-            changeStage(primaryStage,2);
+            changeStage(primaryStage, 2);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -498,36 +557,31 @@ public class Main extends Application{
     {
         custPin = custPin + Integer.toString(number);
         try {
-            changeStage(primaryStage,4);
+            changeStage(primaryStage, 4);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
     }
+
     private void btn_ITEM_ID() throws FileNotFoundException {
         changeStage(primaryStage, 2);
     }
 
     private void btn_numpadVerify() throws FileNotFoundException //Matches Phone #
     {
-        if(Jim.pNum.equals(phoneN))
-        {
+        if (Jim.pNum.equals(phoneN)) {
             changeStage(primaryStage, 4);
-        }
-        else
-        {
+        } else {
             changeStage(primaryStage, 1);
         }
     }
 
     private void btn_numpadVerify2() throws FileNotFoundException //Matches Pin #, if false it moves back to start
     {
-        if(Jim.memPin.equals(custPin))
-        {
+        if (Jim.memPin.equals(custPin)) {
             isLoyal = true;
             changeStage(primaryStage, 1);
-        }
-        else
-        {
+        } else {
             changeStage(primaryStage, 1);
         }
     }
@@ -544,52 +598,75 @@ public class Main extends Application{
         String meat = "456789";
         String apples = "567891";
         int linecount = project.linecounter();
-        while(i < linecount){
-            if(newArray[i][m].equals(ItemID)){
-                if(ItemID.equals(bread)){
+        while (i < linecount) {
+            if (newArray[i][m].equals(ItemID)) {
+                if (ItemID.equals(bread)) {
                     m++;
-                    display = display +"Item: "+ "Bread" + " "+"Amount: "+ newArray[i][m]+"\n";
+                    display = display + "Item: " + "Bread" + " " + "Amount: " + newArray[i][m] + "\n";
+                    i++;
+                } else if (ItemID.equals(soda)) {
+                    m++;
+                    display = display + "Item: " + "Soda" + " " + "Amount: " + newArray[i][m] + "\n";
+                    i++;
+                } else if (ItemID.equals(blanket)) {
+                    m++;
+                    display = display + "Item: " + "Blanket" + " " + "Amount: " + newArray[i][m] + "\n";
+                    i++;
+                } else if (ItemID.equals(meat)) {
+                    m++;
+                    display = display + "Item: " + "Meat" + " " + "Amount: " + newArray[i][m] + "\n";
+                    i++;
+                } else if (ItemID.equals(apples)) {
+                    m++;
+                    display = display + "Item: " + "Apples" + " " + "Amount: " + newArray[i][m] + "\n";
                     i++;
                 }
-                else if(ItemID.equals(soda)){
-                    m++;
-                    display = display +"Item: "+ "Soda" + " "+"Amount: "+ newArray[i][m]+"\n";
-                    i++;
-                }
-                else if(ItemID.equals(blanket)){
-                    m++;
-                    display = display +"Item: "+ "Blanket" + " "+"Amount: "+ newArray[i][m]+"\n";
-                    i++;
-                }
-                else if(ItemID.equals(meat)){
-                    m++;
-                    display = display +"Item: "+ "Meat" + " "+"Amount: "+ newArray[i][m]+"\n";
-                    i++;
-                }
-                else if(ItemID.equals(apples)){
-                    m++;
-                    display = display +"Item: "+ "Apples" + " "+"Amount: "+ newArray[i][m]+"\n";
-                    i++;
-                }
+            } else {
+                i++;
             }
-            else{i++;}
 
         }
         ItemID = "";
 
-        if(isFirst) //Checks if this is first item input
+        if (isFirst) //Checks if this is first item input
         {
-            changeStage(primaryStage,3);
+            changeStage(primaryStage, 3);
+        } else {
+            changeStage(primaryStage, 1);
         }
-        else
-        {
-            changeStage(primaryStage,1);
+
+
+
+
+    }
+    private void btn_total() throws FileNotFoundException {
+        System.out.println(inventory.tempList[0][0]);
+        changeStage(primaryStage, 5);
+
+    }
+
+    private void btn_Card(){//Must check if their card is valid. Check their account balance.
+        //if card is valid then...
+        int i = 0;
+        int temp;
+        int temp2;
+        int newAmount;
+        String newString;
+        while(i < counter.count) {
+            if (inventory.tempList[i][0].equals(inventory.itemList[i][0])) {
+                temp = Integer.parseInt(inventory.itemList[i][1]);
+                temp2 = Integer.parseInt(inventory.tempList[i][1]);
+                newAmount = temp - temp2;
+                newString = Integer.toString(newAmount);
+                inventory.itemList[i][1] = newString;
+                System.out.println("New Inventory Amount for "+ inventory.itemList[i][0] + " is "+ inventory.itemList[i][1]+ "\n");
+
+            }
+            i++;
         }
 
     }
 
 
 
-
 }
-
