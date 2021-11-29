@@ -535,7 +535,7 @@ public class Main extends Application {
             Label lblReceipt = new Label(display);
             GridPane.setConstraints(lblReceipt, 4, 3);
             Label lblTotal = new Label("Your Total: $"+counter.total);
-            GridPane.setConstraints(lblTotal, 4, 5);
+            GridPane.setConstraints(lblTotal, 4, 6);
 
             if(isLoyal)
             {
@@ -547,7 +547,7 @@ public class Main extends Application {
             }
 
             Label lblrewardsPoints = new Label("Rewards Points: " + rewards);
-            GridPane.setConstraints(lblrewardsPoints, 4, 6);
+            GridPane.setConstraints(lblrewardsPoints, 4, 5);
 
             grid.getChildren().addAll(lblMessage,lblReceipt,lblTotal, lblrewardsPoints);
             Scene scene = new Scene(grid, 1000, 1000);
@@ -647,6 +647,43 @@ public class Main extends Application {
             Scene scene = new Scene(grid, 1000, 1000);
             stage.setScene(scene);
             stage.show();
+        }
+        else if(newStage == 8){
+            GridPane grid = new GridPane();
+            grid.setPadding(new Insets(25, 25, 25, 25));
+            grid.setVgap(18);
+            grid.setHgap(10);
+            double rewards = 0;
+
+            Label lblMessage = new Label("---------------Your Printed Receipt---------------");
+            GridPane.setConstraints(lblMessage, 4, 2);
+            Label lblReceipt = new Label(display);
+            GridPane.setConstraints(lblReceipt, 4, 3);
+
+            if(isLoyal)
+            {
+                rewards = (Jim.cP + (counter.total / 10));
+            }
+            else
+            {
+                rewards = counter.total / 10;
+            }
+
+            Label lblrewardsPoints = new Label("Rewards Points: " + rewards);
+            GridPane.setConstraints(lblrewardsPoints, 4, 5);
+            Label lblCnum = new Label("Card #: " + jimCard.cnum);
+            GridPane.setConstraints(lblrewardsPoints, 4, 6);
+            Label lblAuth = new Label("Rewards Points: " + jimCard.Auth);
+            GridPane.setConstraints(lblrewardsPoints, 4, 7);
+            Label lblTotal = new Label("Your Total: $"+counter.total);
+            GridPane.setConstraints(lblTotal, 4, 8);
+
+            grid.getChildren().addAll(lblMessage,lblReceipt,lblTotal, lblrewardsPoints, lblCnum, lblAuth);
+            Scene scene = new Scene(grid, 1000, 1000);
+            stage.setScene(scene);
+            stage.show();
+
+
         }
 
     }
@@ -801,7 +838,11 @@ public class Main extends Application {
     {
         if(custPin.equals(jimCard.cPin))
         {
-
+            changeStage(primaryStage, 8);
+        }
+        else
+        {
+            changeStage(primaryStage, 5);
         }
     }
 
@@ -882,8 +923,8 @@ public class Main extends Application {
         double temp2;
         double meatPrice = 10.00;
         double applesPrice = 1.00;
-        double perlbpriceMeat = 1.25
-        double perlbpriceApples = .25
+        double perlbpriceMeat = 1.25;
+        double perlbpriceApples = .25;
         if(inventory.tempList[i][0].equals("meat")){
             temp = meatPrice * perlbpriceMeat;
             temp2 = temp + meatPrice;
