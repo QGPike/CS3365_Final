@@ -9,15 +9,7 @@ import javafx.stage.Stage;
 
 import java.io.FileNotFoundException;
 
-class weights{
-        String[][] weights;
 
-    {
-        weights = new String[][]{{"Bread", "0.5"},
-                {"Soda", "0.25"}
-                };
-    }
-}
 class Inventory{
     String[][] itemList;
     String[][] tempList = new String[5][2];
@@ -109,7 +101,7 @@ public class Main extends Application {
             Label lblCustomerDisplay = new Label("---Customer Display---");
             GridPane.setConstraints(lblCustomerDisplay, 25, 3);
 
-            grid.getChildren().addAll(Scan, ITEM_ID, Scale, lblCashierDisplay, lblCustomerDisplay);
+            grid.getChildren().addAll(Scan, ITEM_ID,lblCashierDisplay, lblCustomerDisplay);
             Scene scene = new Scene(grid, 1000, 1000);
             stage.setScene(scene);
             stage.show();
@@ -890,18 +882,18 @@ public class Main extends Application {
         double temp2;
         double meatPrice = 10.00;
         double applesPrice = 1.00;
+        double perlbpriceMeat = 1.25
+        double perlbpriceApples = .25
         if(inventory.tempList[i][0].equals("meat")){
-            temp = Double.parseDouble(weights.weights[i][1]);
-            temp2 = temp * meatPrice;
-            temp += meatPrice + temp2;
-            counter.total += temp;
+            temp = meatPrice * perlbpriceMeat;
+            temp2 = temp + meatPrice;
+            counter.total += temp2;
 
         }
         else if(inventory.tempList[i][0].equals("apples")){
-            temp = Double.parseDouble(weights.weights[i][1]);
-            temp2 = temp * meatPrice;
+            temp = meatPrice * perlbpriceApples;
+            temp2 = temp + applesPrice;
             counter.total += temp2;
-
         }
         try {
             changeStage(primaryStage,1);
